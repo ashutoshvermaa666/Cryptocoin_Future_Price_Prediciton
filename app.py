@@ -1,3 +1,43 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Use a secure key in production
+
+# Dummy user storage for demonstration
+users = {}
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in users:
+            return "User already exists!"
+        users[username] = password  # Store user info (hashed in production)
+        return redirect(url_for('login'))
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in users and users[username] == password:
+            session['username'] = username
+            return redirect(url_for('home'))
+        return "Invalid credentials!"
+    return render_template('login.html')
+
+@app.route('/home')
+def home():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('home.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+###################################################
 from flask import Flask, render_template, request, jsonify
 from final_predicting import get_future_price, historical_data_func, get_corr
 import json
