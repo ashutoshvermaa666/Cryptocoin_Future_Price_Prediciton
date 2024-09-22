@@ -520,6 +520,92 @@ window.onload = function() {
         });
     }
     })
+<!DOCTYPE html> 
+<html>
+<head>
+  <style>
+    /* Existing styles ... */
+    
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    .form-container input {
+      margin: 10px 0;
+      padding: 10px;
+      width: 300px;
+    }
+    
+    .form-container button {
+      padding: 10px;
+      width: 100px;
+    }
+
+    /* Loading spinner, table styles, etc... */
+  </style>
+  <script>
+    // Existing JavaScript ...
+
+    function showForm(formType) {
+      const signupForm = document.getElementById("signupForm");
+      const loginForm = document.getElementById("loginForm");
+      
+      if (formType === "signup") {
+        signupForm.style.display = "block";
+        loginForm.style.display = "none";
+      } else {
+        signupForm.style.display = "none";
+        loginForm.style.display = "block";
+      }
+    }
+  </script>
+</head>
+<body class="main-body">
+
+    <div>
+        <h1>Cryptocurrency Prediction App</h1>
+        <button onclick="showForm('signup')">Sign Up</button>
+        <button onclick="showForm('login')">Login</button>
+    </div>
+
+    <div class="form-container" id="signupForm" style="display: none;">
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+        <button onclick="signup()">Sign Up</button>
+    </div>
+
+    <div class="form-container" id="loginForm" style="display: none;">
+        <h2>Login</h2>
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Existing elements ... -->
+    
+    <script>
+        function signup() {
+            // Implement signup logic here
+            const username = document.querySelector('#signupForm input[type="text"]').value;
+            const password = document.querySelector('#signupForm input[type="password"]').value;
+            console.log("Signing up:", username, password);
+            // You can send this data to your Flask backend via AJAX
+        }
+
+        function login() {
+            // Implement login logic here
+            const username = document.querySelector('#loginForm input[type="text"]').value;
+            const password = document.querySelector('#loginForm input[type="password"]').value;
+            console.log("Logging in:", username, password);
+            // You can send this data to your Flask backend via AJAX
+        }
+    </script>
+</body>
+</html>
 
   }
 
